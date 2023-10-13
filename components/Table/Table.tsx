@@ -1,13 +1,19 @@
 import React from "react";
 
-export type dataType = {
-  employeeNo: string;
+export type Salutation = "Dr." | "Mr." | "Ms." | "Mrs." | "Mx.";
+export type ProfileColour = "Green" | "Red" | "Blue" | "Default";
+export type Gender = "male" | "female" | "unspecified"
+
+export type TData = {
+  employeeNo: number | null;
   firstName: string;
   lastName: string;
-  salutation: string;
-  profileColour: "Green" | "Red" | "Blue" | "Default";
-  grossSalary: string
+  salutation: Salutation;
+  gender: Gender;
+  profileColour: ProfileColour;
+  grossSalary: string | null;
 };
+
 const Table = ({ data, handleClick, selectedEmployee }: any) => {
   const headings = [
     "Employee #",
@@ -30,9 +36,9 @@ const Table = ({ data, handleClick, selectedEmployee }: any) => {
           })}
         </tr>
         <tbody>
-          {data.map(
+          {data?.map(
             (
-              employee: dataType,
+              employee: TData,
               index: number
             ) => {
               return (

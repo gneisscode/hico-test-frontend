@@ -1,3 +1,4 @@
 import { formatSalary } from "./formatSalary";
+import { axiosWithoutToken } from "./axios";
 
-export{formatSalary}
+export{formatSalary, axiosWithoutToken, }

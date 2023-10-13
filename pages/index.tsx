@@ -1,55 +1,58 @@
 import { Inter } from "next/font/google";
 import { Button, Table, Info } from "@/components";
-import { useState } from "react";
-import { dataType } from "@/components/Table/Table";
+import { useEffect, useState } from "react";
+import { TData } from "@/components/Table/Table";
+import { EmployeeService } from "@/services";
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const newEmployee: dataType = {
-    employeeNo: "",
+
+  const newEmployee: TData = {
+    employeeNo: null,
     firstName: "",
     lastName: "",
-    salutation: "",
+    salutation: "Dr.",
     profileColour: "Default",
-    grossSalary:""
+    grossSalary:null,
+    gender: "male"
   };
-  const data = [
-    {
-      employeeNo: "12345678",
-      firstName: "Shalom David",
-      lastName: "Effiom",
-      salutation: "Mr.",
-      profileColour: "Blue",
-      grossSalary: "560000",
-    },
-    {
-      employeeNo: "12345578",
-      firstName: "Archibald Eusebius Jonathan",
-      lastName: "van der Merwe",
-      salutation: "Mx.",
-      profileColour: "Green",
-      grossSalary: "760000000",
-    },
-    {
-      employeeNo: "12245678",
-      firstName: "Emmanuella Biye",
-      lastName: "Ikwen",
-      salutation: "Ms.",
-      profileColour: "Red",
-      grossSalary: "230000",
-    },
-  ];
 
+  const [employeeData, setEmployeeData] = useState([])
   const [showEmployeeInfo, setShowEmployeeInfo] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState<null | dataType>(
+  const [selectedEmployee, setSelectedEmployee] = useState<null | TData>(
     null
   );
+  const [isNewEmployee, setIsNewEmployee] = useState(false)
 
-  const handleClick = (employee: dataType) => {
+  const handleClick = (employee: TData) => {
     setShowEmployeeInfo(true);
     setSelectedEmployee(employee);
+    setIsNewEmployee(false)
   };
+
+  useEffect(()=>{
+     const getEmployeesRequest = async () => {
+
+       try {
+        const response = await EmployeeService.getEmployees()
+         console.log(response.data);
+         const data= response.data?.data
+         setEmployeeData(data)
+       } catch (error: any) {
+         console.log(error);
+         throw new Error(error?.response?.data?.message || "An error occurred");
+       }
+     };
+
+     getEmployeesRequest()
+
+  }, [])
+
+
+  
   return (
     <>
       <main className="flex flex-col items-center">
@@ -62,17 +65,18 @@ export default function Home() {
             onClick={() => {
               setShowEmployeeInfo(true);
               setSelectedEmployee(newEmployee);
+              setIsNewEmployee(true)
             }}
           >
             Add Employee
           </Button>
         </div>
         <Table
-          data={data}
+          data={employeeData}
           handleClick={handleClick}
           selectedEmployee={selectedEmployee}
         />
-        {showEmployeeInfo && <Info selectedEmployee={selectedEmployee} />}
+        {showEmployeeInfo && <Info selectedEmployee={selectedEmployee} isNewEmployee={isNewEmployee} />}
       </main>
     </>
   );
