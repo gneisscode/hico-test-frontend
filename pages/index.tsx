@@ -6,8 +6,6 @@ import { EmployeeService } from "@/services";
 
 
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
 
   const newEmployee: TData = {
@@ -26,6 +24,7 @@ export default function Home() {
     null
   );
   const [isNewEmployee, setIsNewEmployee] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleClick = (employee: TData) => {
     setShowEmployeeInfo(true);
@@ -36,14 +35,11 @@ export default function Home() {
        const getEmployeesRequest = async () => {
          try {
            const response = await EmployeeService.getEmployees();
-           console.log(response.data);
-           const data = response.data?.data;
+           console.log(response?.data);
+           const data = response?.data?.data;
            setEmployeeData(data);
          } catch (error: any) {
            console.log(error);
-           throw new Error(
-             error?.response?.data?.message || "An error occurred"
-           );
          }
        };
 
@@ -55,30 +51,34 @@ export default function Home() {
 
   
   return (
-    <>
-      <main className="flex flex-col items-center">
-        <div className="flex w-full  justify-center items-center p-4">
-          <h1 className="ml-auto self-center font-bold text-center text-xl pl-24">
-            Current Employees
-          </h1>
-          <Button
-            className="ml-auto"
-            onClick={() => {
-              setShowEmployeeInfo(true);
-              setSelectedEmployee(newEmployee);
-              setIsNewEmployee(true)
-            }}
-          >
-            Add Employee
-          </Button>
-        </div>
-        <Table
-          data={employeeData}
-          handleClick={handleClick}
+    <main className="flex flex-col items-center w-[100%]  md:px-16">
+      <div className="flex w-[100%] justify-between items-center py-4">
+        <h1 className="ml-auto self-center font-bold text-center text-2xl md:pl-24">
+          Current Employees
+        </h1>
+        <Button
+          className="ml-auto"
+          onClick={() => {
+            setShowEmployeeInfo(true);
+            setSelectedEmployee(newEmployee);
+            setIsNewEmployee(true);
+          }}
+        >
+          Add Employee
+        </Button>
+      </div>
+      <Table
+        data={employeeData}
+        handleClick={handleClick}
+        selectedEmployee={selectedEmployee}
+      />
+      {showEmployeeInfo && (
+        <Info
           selectedEmployee={selectedEmployee}
+          isNewEmployee={isNewEmployee}
+          getEmployees={getEmployeesRequest}
         />
-        {showEmployeeInfo && <Info selectedEmployee={selectedEmployee} isNewEmployee={isNewEmployee} getEmployees={getEmployeesRequest} />}
-      </main>
-    </>
+      )}
+    </main>
   );
 }

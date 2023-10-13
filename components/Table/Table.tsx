@@ -24,23 +24,20 @@ const Table = ({ data, handleClick, selectedEmployee }: any) => {
   ];
 
   return (
-    <div className="flex justify-center p-16 w-[100%]">
-      <table className="table-auto w-[100%]">
-        <tr className=" bg-gray-300">
-          {headings.map((heading, index) => {
-            return (
-              <th key={index} className=" text-left">
-                {heading}
-              </th>
-            );
-          })}
-        </tr>
-        <tbody>
-          {data?.map(
-            (
-              employee: TData,
-              index: number
-            ) => {
+    <div className="flex md:p-16 w-[100%]">
+      {data.length > 0 ? (
+        <table className="table-auto w-[100%]">
+          <tr className=" bg-gray-300">
+            {headings.map((heading, index) => {
+              return (
+                <th key={index} className=" text-left">
+                  {heading}
+                </th>
+              );
+            })}
+          </tr>
+          <tbody>
+            {data?.map((employee: TData, index: number) => {
               return (
                 <tr
                   key={index}
@@ -60,10 +57,14 @@ const Table = ({ data, handleClick, selectedEmployee }: any) => {
                   <td>{employee.profileColour}</td>
                 </tr>
               );
-            }
-          )}
-        </tbody>
-      </table>
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <div className="flex justify-center items-center w-[100%] ">
+          <p>No employee found, add new employee</p>
+        </div>
+      )}
     </div>
   );
 };

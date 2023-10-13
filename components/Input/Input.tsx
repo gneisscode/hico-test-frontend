@@ -47,7 +47,7 @@ const Input = ({
       <input
         className={`${className} ${
           readOnly ? "text-gray-500 border-gray-500 outline-none" : "border-black"
-        } border  w-[350px]`}
+        } ${disabled? "cursor-not-allowed bg-white" : ""} border p-1 md:w-[350px] font-medium`}
         title={label}
         value={value}
         type={type}

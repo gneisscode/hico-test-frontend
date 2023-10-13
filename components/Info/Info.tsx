@@ -8,6 +8,9 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
   const [fullName, setFullName] = useState("");
   const [selectedCheckbox, setSelectedCheckbox] = useState("Default");
   const [selectedGender, setSelectedGender] = useState<Gender>(selectedEmployee.gender);
+  const [message, setMessage] = useState("")
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const initialFormState = {
     firstName: selectedEmployee.firstName,
@@ -95,6 +98,8 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
         //@ts-ignore
         salutationToGenderMap[selectedEmployee.salutation] || selectedEmployee.gender
       );
+      setMessage("")
+      setError("")
     }
   }, [selectedEmployee]);
 
@@ -112,11 +117,15 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
 
     try {
       if (isNewEmployee) {
+        setLoading(true)
         const response = await EmployeeService.AddEmployee(formData);
-        console.log(response.data);
+        console.log(response?.data);
+        setMessage(response?.data?.message)
+        setLoading(false);
         return getEmployees();
       }
 
+      setLoading(true);
       const id = selectedEmployee._id;
       const formDataWithId = {
         ...formData,
@@ -124,20 +133,27 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
       };
       const response = await EmployeeService.UpdateEmployee(formDataWithId);
       console.log(response.data);
+       setMessage(response.data?.message);
+       setLoading(false);
       return getEmployees();
     } catch (error: any) {
       console.log(error);
-      throw new Error(error?.response?.data?.message || "An error occurred");
+      setError(error?.response?.data?.message || "An error occurred");
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col items-center  gap-16 w-[100%] p-16">
-      <h1 className="font-bold font-xl">Employee Information</h1>
+    <div className="flex flex-col items-center gap-16 w-[100%] p-4 md:p-16 md:border border-gray-300 mb-16">
+      <h1 className="font-bold text-xl">Employee Information</h1>
+
+      {error && <p className="text-red-500 font-bold text-md">{error}</p>}
+
+      {message && <p className="text-green-500 font-bold text-md">{message}</p>}
 
       <form
         onSubmit={UpdateEmployeeRequest}
-        className=" flex flex-col items-center gap-24 w-[100%]"
+        className=" flex flex-col gap-24 w-[100%]"
       >
         <div className=" flex self-end gap-4">
           <Button
@@ -165,11 +181,11 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
                 : ""
             } transition-colors delay-150 ease-linear`}
           >
-            Save
+           {loading? "Saving..." : "Save"}
           </Button>
         </div>
 
-        <div className="flex justify-between w-[100%]">
+        <div className="flex flex-col gap-4 md:gap-0 md:flex-row md:justify-between md:pl-0 w-[100%]">
           {" "}
           <div className="flex flex-col gap-4">
             <Input
@@ -191,7 +207,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
               }}
             />
             <div className="flex w-[100%] gap-2">
-              <label htmlFor="salutation" className=" min-w-[180px]">
+              <label htmlFor="salutation" className="min-w-[180px]">
                 Salutation &nbsp;*
               </label>
 
@@ -200,7 +216,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
                 id="salutation"
                 value={formData.salutation}
                 onChange={(e) => handleInputChange(e)}
-                className="border border-black"
+                className="border border-black md:w-[350px] p-1"
               >
                 {salutations.map(({ label, value }, index) => {
                   return (
@@ -213,20 +229,18 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
             </div>
 
             <div className="flex gap-2">
-              <p className=" min-w-[180px]"> Gender &nbsp;*</p>
+              <p className="min-w-[180px]"> Gender &nbsp;*</p>
 
-              <div className="flex gap-16">
+              <div className="flex gap-2  md:gap-16">
                 {genders.map((gender, index) => {
                   return (
                     <div className="flex gap-2" key={index}>
-                      <label htmlFor={gender.id}>{gender.label}</label>
                       <input
                         type="radio"
                         id={gender.id}
                         name="gender"
                         value={gender.id}
                         checked={selectedGender === gender.id}
-                       
                         onChange={() => {
                           //@ts-ignore
                           setSelectedGender(gender.id);
@@ -236,6 +250,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
                           });
                         }}
                       />
+                      <label htmlFor={gender.id}>{gender.label}</label>
                     </div>
                   );
                 })}
@@ -248,6 +263,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
               required={true}
               value={formData.employeeNo}
               onChange={(e) => handleInputChange(e)}
+              className=" text-end"
             />
           </div>
           <div className="flex flex-col gap-4">
@@ -257,6 +273,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
               required={true}
               value={fullName}
               readOnly={true}
+              disabled={true}
             />
 
             <Input
@@ -265,14 +282,15 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
               required={true}
               value={formData.grossSalary}
               onChange={(e) => handleInputChange(e)}
+              className="text-end"
             />
 
             <div className="flex gap-2">
               <p className=" min-w-[180px]"> Employee Profile Colour</p>
-              <div className="flex gap-4">
+              <div className="flex gap-2 md:gap-4">
                 {checkboxes.map((checkbox, index) => {
                   return (
-                    <div className="flex gap-2" key={index}>
+                    <div className="flex gap-1 md:gap-2" key={index}>
                       <input
                         type="checkbox"
                         id={checkbox.id}
