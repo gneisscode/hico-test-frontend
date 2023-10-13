@@ -1,4 +1,13 @@
-import { formatSalary } from "./formatSalary";
 import { axiosWithoutToken } from "./axios";
+import {
+  handleAlphabeticInput,
+  handleNumericInput,
+  formatSalary,
+} from "./fieldValidation";
 
-export{formatSalary, axiosWithoutToken, }
+export {
+  formatSalary,
+  axiosWithoutToken,
+  handleAlphabeticInput,
+  handleNumericInput,
+};

@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input } from "..";
 import { EmployeeService } from "@/services";
-import { formatSalary } from "@/utils";
+import { formatSalary, handleAlphabeticInput, handleNumericInput } from "@/utils";
 import { Gender } from "../Table/Table";
 
-const Info = ({ selectedEmployee, isNewEmployee }: any) => {
-
-
+const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
   const [fullName, setFullName] = useState("");
   const [selectedCheckbox, setSelectedCheckbox] = useState("Default");
-  const [selectedGender, setSelectedGender] = useState<Gender>("male");
- 
+  const [selectedGender, setSelectedGender] = useState<Gender>(selectedEmployee.gender);
+
   const initialFormState = {
-    firstName: selectedEmployee.firstName || "",
-    lastName: selectedEmployee.lastName || "",
-    salutation: selectedEmployee.salutation || "",
+    firstName: selectedEmployee.firstName,
+    lastName: selectedEmployee.lastName,
+    salutation: selectedEmployee.salutation,
     employeeNo: selectedEmployee.employeeNo || "",
-    profileColour: selectedEmployee.profileColour || "",
-    grossSalary: formatSalary(selectedEmployee.grossSalary )|| "",
-    gender:selectedGender
+    profileColour: selectedEmployee.profileColour,
+    grossSalary: formatSalary(selectedEmployee.grossSalary) || "",
+    gender: selectedEmployee.gender,
   };
 
   const [formData, setFormData] = useState(initialFormState);
-
 
   const checkboxes = [
     { id: "Green", label: "Green" },
@@ -40,20 +37,17 @@ const Info = ({ selectedEmployee, isNewEmployee }: any) => {
   ];
 
   const genders = [
-    {id:"male", label:"Male"},
-    {id:"female", label: "Female"},
-    {id: "unspecified", label: "Unspecified"}
-
-  ]
+    { id: "male", label: "Male" },
+    { id: "female", label: "Female" },
+    { id: "unspecified", label: "Unspecified" },
+  ];
 
   const salutationToGenderMap = {
-    "Dr.": "unspecified",
     "Mr.": "male",
     "Ms.": "female",
     "Mrs.": "female",
     "Mx.": "unspecified",
   };
-
 
   const handleCheck = (id: string) => {
     setSelectedCheckbox(id);
@@ -61,16 +55,27 @@ const Info = ({ selectedEmployee, isNewEmployee }: any) => {
 
   const handleInputChange = (e: any) => {
     const { name, value, type, checked } = e.target;
-     let newValue;
+    let newValue;
 
-     if (type === "checkbox") {
-       newValue = checked ? value : "";
-     } else if (name === "grossSalary") {
-       const numberValue = parseFloat(value.replace(/,/g, ""));
-       newValue = isNaN(numberValue) ? "" : numberValue.toLocaleString();
-     } else {
-       newValue = value;
-     }
+    switch (name) {
+      case "profileColour":
+        newValue = checked ? value : "";
+        break;
+      case "grossSalary":
+        const numberValue = parseFloat(value.replace(/,/g, ""));
+        newValue = isNaN(numberValue) ? "" : numberValue.toLocaleString();
+        break;
+      case "employeeNo":
+        newValue = handleNumericInput(value);
+        break;
+      case "firstName":
+      case "lastName":
+        newValue = handleAlphabeticInput(value);
+        break;
+
+      default:
+        newValue = value;
+    }
 
     setFormData({ ...formData, [name]: newValue });
   };
@@ -88,47 +93,43 @@ const Info = ({ selectedEmployee, isNewEmployee }: any) => {
 
       setSelectedGender(
         //@ts-ignore
-        salutationToGenderMap[selectedEmployee.salutation] || "male"
+        salutationToGenderMap[selectedEmployee.salutation] || selectedEmployee.gender
       );
     }
   }, [selectedEmployee]);
 
   useEffect(() => {
     //@ts-ignore
-    setSelectedGender(salutationToGenderMap[formData.salutation] || "male");
+    setSelectedGender(salutationToGenderMap[formData.salutation] || selectedEmployee.gender);
   }, [formData.salutation]);
 
   useEffect(() => {
     setFullName(formData.firstName + " " + formData.lastName);
   }, [formData.firstName, formData.lastName]);
 
-
-
-  const UpdateEmployeeRequest = async (e:any) => {
+  const UpdateEmployeeRequest = async (e: any) => {
     e.preventDefault();
 
     try {
-       if (isNewEmployee) {
-        const response = await EmployeeService.AddEmployee(formData)
-         console.log(response.data);
-       }
+      if (isNewEmployee) {
+        const response = await EmployeeService.AddEmployee(formData);
+        console.log(response.data);
+        return getEmployees();
+      }
 
-      const id = selectedEmployee._id
+      const id = selectedEmployee._id;
       const formDataWithId = {
         ...formData,
-        id:id
-      }
-      const response = await EmployeeService.UpdateEmployee(formDataWithId)
+        id: id,
+      };
+      const response = await EmployeeService.UpdateEmployee(formDataWithId);
       console.log(response.data);
+      return getEmployees();
     } catch (error: any) {
       console.log(error);
       throw new Error(error?.response?.data?.message || "An error occurred");
     }
   };
-
-
-
-
 
   return (
     <div className="flex flex-col items-center  gap-16 w-[100%] p-16">
@@ -225,6 +226,15 @@ const Info = ({ selectedEmployee, isNewEmployee }: any) => {
                         name="gender"
                         value={gender.id}
                         checked={selectedGender === gender.id}
+                       
+                        onChange={() => {
+                          //@ts-ignore
+                          setSelectedGender(gender.id);
+                          setFormData({
+                            ...formData, //@ts-ignore
+                            gender: gender.id,
+                          });
+                        }}
                       />
                     </div>
                   );

@@ -2,7 +2,6 @@ import { axiosWithoutToken } from "@/utils/axios";
 import { TData } from "@/components/Table/Table";
 
 class EmployeeServiceClass {
-  
   AddEmployee(payload: TData) {
     return axiosWithoutToken.post("/employee", {
       ...payload,
@@ -22,7 +21,14 @@ class EmployeeServiceClass {
       ...payload,
     });
   }
+
+  DeleteEmployee(id: string) {
+    return axiosWithoutToken.delete(`/employee/${id}`);
+  }
 }
+
+
+
 
 const EmployeeService = new EmployeeServiceClass();
 

@@ -33,20 +33,21 @@ export default function Home() {
     setIsNewEmployee(false)
   };
 
+       const getEmployeesRequest = async () => {
+         try {
+           const response = await EmployeeService.getEmployees();
+           console.log(response.data);
+           const data = response.data?.data;
+           setEmployeeData(data);
+         } catch (error: any) {
+           console.log(error);
+           throw new Error(
+             error?.response?.data?.message || "An error occurred"
+           );
+         }
+       };
+
   useEffect(()=>{
-     const getEmployeesRequest = async () => {
-
-       try {
-        const response = await EmployeeService.getEmployees()
-         console.log(response.data);
-         const data= response.data?.data
-         setEmployeeData(data)
-       } catch (error: any) {
-         console.log(error);
-         throw new Error(error?.response?.data?.message || "An error occurred");
-       }
-     };
-
      getEmployeesRequest()
 
   }, [])
@@ -76,7 +77,7 @@ export default function Home() {
           handleClick={handleClick}
           selectedEmployee={selectedEmployee}
         />
-        {showEmployeeInfo && <Info selectedEmployee={selectedEmployee} isNewEmployee={isNewEmployee} />}
+        {showEmployeeInfo && <Info selectedEmployee={selectedEmployee} isNewEmployee={isNewEmployee} getEmployees={getEmployeesRequest} />}
       </main>
     </>
   );
