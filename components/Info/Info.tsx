@@ -65,7 +65,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
         newValue = checked ? value : "";
         break;
       case "grossSalary":
-        const numberValue = parseFloat(value.replace(/,/g, ""));
+        const numberValue = parseFloat(value.replace(/,/g, " "));
         newValue = isNaN(numberValue) ? "" : numberValue.toLocaleString();
         break;
       case "employeeNo":

@@ -63,4 +63,11 @@ describe("Table Component", () => {
       );
     });
   });
+
+  test("renders a message when there is no data", () => {
+    render(<Table data={[]} handleClick={() => {}} selectedEmployee={null} />);
+    expect(
+      screen.getByText("No employee found, add new employee")
+    ).toBeInTheDocument();
+  });
 });
