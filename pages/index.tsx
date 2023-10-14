@@ -37,10 +37,10 @@ export default function Home() {
            const response = await EmployeeService.getEmployees();
            console.log(response?.data);
            const data = response?.data?.data;
-           setEmployeeData(data);
-          //  act(() => {
-          //    setEmployeeData(data);
-          //  });
+          //  setEmployeeData(data);
+           act(() => {
+             setEmployeeData(data);
+           });
          } catch (error: any) {
            console.log(error);
          }
