@@ -14,5 +14,15 @@ pipeline {
                 sh 'npm test'
             }
         }
+        
+        stage('Build Images') {
+            steps {
+                script {
+                    // Build client image
+                    sh 'docker build -t hico-frontend-image:latest -f client/Dockerfile.client .'
+                
+                }
+            }
+        }
 	}
 }
