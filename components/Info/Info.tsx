@@ -185,7 +185,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
           </Button>
         </div>
 
-        <div className="flex flex-col gap-4 md:gap-0 md:flex-row md:justify-between md:pl-0 w-[100%]">
+        <div className="flex flex-col gap-4 lg:gap-0 lg:flex-row md:justify-between md:pl-0 w-[100%]">
           {" "}
           <div className="flex flex-col gap-4">
             <Input

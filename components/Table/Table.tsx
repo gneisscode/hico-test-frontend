@@ -27,15 +27,18 @@ const Table = ({ data, handleClick, selectedEmployee }: any) => {
     <div className="flex md:p-16 w-[100%]">
       {data.length > 0 ? (
         <table className="table-auto w-[100%]">
-          <tr className=" bg-gray-300">
-            {headings.map((heading, index) => {
-              return (
-                <th key={index} className=" text-left">
-                  {heading}
-                </th>
-              );
-            })}
-          </tr>
+          <thead>
+            <tr className=" bg-gray-300">
+              {headings.map((heading, index) => {
+                return (
+                  <th key={index} className=" text-left">
+                    {heading}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+
           <tbody>
             {data?.map((employee: TData, index: number) => {
               return (
