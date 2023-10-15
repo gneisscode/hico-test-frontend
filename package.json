@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest  --watchAll --runInBand --clearCache --detectOpenHandles --forceExit"
+    "test": "jest  --watchAll --runInBand  --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.1.4",
