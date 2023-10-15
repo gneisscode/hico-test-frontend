@@ -2,7 +2,6 @@ import { Button, Table, Info } from "@/components";
 import { useEffect, useState } from "react";
 import { TData } from "@/components/Table/Table";
 import { EmployeeService } from "@/services";
-import { act } from "react-dom/test-utils";
 
 
 
@@ -38,9 +37,6 @@ export default function Home() {
            console.log(response?.data);
            const data = response?.data?.data;
            setEmployeeData(data);
-          //  act(() => {
-          //    setEmployeeData(data);
-          //  });
          } catch (error: any) {
            console.log(error);
          }
