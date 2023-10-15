@@ -1,28 +1,27 @@
 pipeline {
-	agent any
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
 
-	stages {
-		stage('Checkout') {
-			steps {
-				checkout scm
-			}
-		}
-
-         stage('Client Tests') {
+     stage('Client Tests') {
             steps {
                 sh 'npm install'
                 sh 'npm test'
             }
         }
-        
-        stage('Build Images') {
-            steps {
-                script {
-                    // Build client image
-                    sh 'docker build -t hico-frontend-image:latest -f client/Dockerfile.client .'
-                
-                }
-            }
+
+    stage('Build Images') {
+      steps {
+        script {
+          sh 'docker build -t hico-frontend-image:latest -f Dockerfile.client .'
         }
-	}
+
+      }
+    }
+
+  }
 }
