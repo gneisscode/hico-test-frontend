@@ -33,12 +33,15 @@ export default function Home() {
 
        const getEmployeesRequest = async () => {
          try {
+          setLoading(true)
            const response = await EmployeeService.getEmployees();
            console.log(response?.data);
            const data = response?.data?.data;
            setEmployeeData(data);
+           setLoading(false)
          } catch (error: any) {
            console.log(error);
+           setLoading(false)
          }
        };
 
