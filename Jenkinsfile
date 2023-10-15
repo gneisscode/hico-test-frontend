@@ -7,6 +7,13 @@ pipeline {
       }
     }
 
+     stage('Client Tests') {
+            steps {
+                sh 'npm install'
+                sh 'npm test'
+            }
+        }
+
     stage('Build Images') {
       steps {
         script {
