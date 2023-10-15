@@ -10,7 +10,7 @@ pipeline {
     stage('Build Images') {
       steps {
         script {
-          sh 'docker build -t hico-frontend-image:latest -f client/Dockerfile.client .'
+          sh 'docker build -t hico-frontend-image:latest -f Dockerfile.client .'
         }
 
       }
