@@ -70,11 +70,16 @@ export default function Home() {
           Add Employee
         </Button>
       </div>
-      <Table
-        data={employeeData}
-        handleClick={handleClick}
-        selectedEmployee={selectedEmployee}
-      />
+      {loading ? (
+        <p>Loading employee data...</p>
+      ) : (
+        <Table
+          data={employeeData}
+          handleClick={handleClick}
+          selectedEmployee={selectedEmployee}
+        />
+      )}
+
       {showEmployeeInfo && (
         <Info
           selectedEmployee={selectedEmployee}
