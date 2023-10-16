@@ -18,7 +18,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
     salutation: selectedEmployee.salutation,
     employeeNo: selectedEmployee.employeeNo || "",
     profileColour: selectedEmployee.profileColour,
-    grossSalary: formatSalary(selectedEmployee.grossSalary) || "",
+    grossSalary: selectedEmployee.grossSalary || "",
     gender: selectedEmployee.gender,
   };
 
@@ -46,6 +46,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
   ];
 
   //mapping salutations to specific genders for autopopulate functionality
+  //autopopulate still allows for fields to be manually edited
 
   const salutationToGenderMap = {
     "Mr.": "male",
@@ -196,6 +197,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
             onClick={() => {
               resetform();
             }}
+            //added logic to disable cancel changes button if no changes have occurred
             disabled={
               !Object.keys(formData).some(
                 //@ts-ignore
