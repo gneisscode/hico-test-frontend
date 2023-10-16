@@ -147,9 +147,23 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
     <div className="flex flex-col items-center gap-16 w-[100%] p-4 md:p-16 md:border border-gray-300 mb-16">
       <h1 className="font-bold text-xl">Employee Information</h1>
 
-      {error && <p className="text-red-500 font-bold text-md">{error}</p>}
+      {error && (
+        <p
+          data-testid="error-message"
+          className="text-red-500 font-bold text-md"
+        >
+          {error}
+        </p>
+      )}
 
-      {message && <p className="text-green-500 font-bold text-md">{message}</p>}
+      {message && (
+        <p
+          data-testid="success-message"
+          className="text-green-500 font-bold text-md"
+        >
+          {message}
+        </p>
+      )}
 
       <form
         onSubmit={UpdateEmployeeRequest}
@@ -181,7 +195,7 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
                 : ""
             } transition-colors delay-150 ease-linear`}
           >
-           {loading? "Saving..." : "Save"}
+            {loading ? "Saving..." : "Save"}
           </Button>
         </div>
 

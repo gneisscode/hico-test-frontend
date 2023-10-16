@@ -61,6 +61,7 @@ const Input = ({
         maxLength={maxLength}
         pattern={pattern}
         readOnly={readOnly}
+        data-testid={name}
       />
     </div>
   );

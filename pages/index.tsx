@@ -70,7 +70,7 @@ export default function Home() {
         </Button>
       </div>
       {loading ? (
-        <p>Loading employee data...</p>
+        <p>Please wait a moment. Loading employee data...</p>
       ) : (
         <Table
           data={employeeData}
