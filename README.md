@@ -14,8 +14,7 @@ The live version of this application is hosted on Vercel. You can access it [her
 #### Next.js for Modern Web Development
 
 The application is powered by Next.js, a React framework known for its simplicity and performance. Leveraging server-side rendering and a powerful plugin system, Next.js enables a smooth development workflow and optimal user experiences.
-Tailwind CSS for Stylish User Interfaces
-Styling is crafted with Tailwind CSS, a utility-first CSS framework. Tailwind streamlines the styling process, allowing for rapid development and easy maintenance. The utility classes provided by Tailwind offer a flexible and responsive design system.
+Styling is done with Tailwind CSS, a utility-first CSS framework. Tailwind streamlines the styling process, allowing for rapid development and easy maintenance. The utility classes provided by Tailwind offer a flexible and responsive design system.
 
 #### Axios for Efficient API Requests
 
