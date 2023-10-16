@@ -11,32 +11,32 @@ The live version of this application is hosted on Vercel. You can access it [her
 
 ### Key Technologies Used
 
-#### Next.js for Modern Web Development
+#### **Next.js for Modern Web Development**
 
 The application is powered by Next.js, a React framework known for its simplicity and performance. Leveraging server-side rendering and a powerful plugin system, Next.js enables a smooth development workflow and optimal user experiences.
 Styling is done with Tailwind CSS, a utility-first CSS framework. Tailwind streamlines the styling process, allowing for rapid development and easy maintenance. The utility classes provided by Tailwind offer a flexible and responsive design system.
 
-#### Axios for Efficient API Requests
+#### **Axios for Efficient API Requests**
 
 API requests are managed with Axios, a popular HTTP client. Axios simplifies data fetching and manipulation, enhancing the application's ability to communicate with backend services and retrieve or update employee data seamlessly.
 
-#### Jest for Testing
+#### **Jest for Testing**
 
 Ensuring the reliability of the application, Jest is employed for testing. Jest provides a comprehensive testing suite with features like snapshot testing and test-driven development (TDD), guaranteeing the stability of the codebase across updates and new features.
 
-#### Vercel for Cloud Deployment
+#### **Vercel for Cloud Deployment**
 
 The application is deployed on Vercel, a cloud platform that automates the deployment process. With Vercel, deploying updates and scaling the application becomes a straightforward task, providing a reliable and performant hosting solution.
 
-#### Jenkins on Azure for CI/CD Pipeline Automation
+#### **Jenkins on Azure for CI/CD Pipeline Automation**
 
 Continuous Integration and Continuous Deployment (CI/CD) are orchestrated through Jenkins. This automation tool facilitates the building, testing, and deployment of the application. The CI/CD pipeline includes building Docker images and pushing them to a Docker registry, ensuring a streamlined and efficient release process.
 
-#### Docker for Local Server Deployment
+#### **Docker for Local Server Deployment**
 
 Docker is integrated into the CI/CD pipeline, allowing the application to run on a local server. Docker containers provide consistency across different environments, making it easy for developers to replicate the production environment on their local machines for testing and debugging.
 
-#### Azure for Hosting Jenkins
+#### **Azure for Hosting Jenkins**
 
 Jenkins is hosted on an Ubuntu Virtual Machine (VM) on Microsoft Azure. Leveraging Azure's infrastructure, Jenkins ensures a reliable and scalable environment for the automation of CI/CD processes. This includes building, testing, and deploying the application seamlessly.
 
