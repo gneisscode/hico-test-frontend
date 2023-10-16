@@ -1,4 +1,4 @@
-//format salary field, great at formatting data fetched from API, would need something better to handle input change
+//format salary field, works for formatting data fetched from API, would need something better to handle input change
 
 export const formatSalary = (value: any) => {
   const numberValue = parseFloat(value?.replace(/,/g, ""));
