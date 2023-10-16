@@ -58,7 +58,7 @@ To run this project locally, follow these steps:
 3. Install dependencies: `npm install`
 
 
-# Getting Started
+## Getting Started
 
 First, run the development server:
 
@@ -97,19 +97,19 @@ This directory holds reusable UI components that are used across different parts
 
 ### pages: 
 
-The pages directory is a core part of Next.js and contains the index file for the main page. Additionally, it serves as the home for all application pages. Each file in this directory corresponds to a page in your app, making it easy to navigate and understand the application's structure.
+The **pages** directory is a core part of Next.js and contains the index file for the main page. Additionally, it serves as the home for all application pages. Each file in this directory corresponds to a page in your app, making it easy to navigate and understand the application's structure.
 
 ### services: 
 
-In the services directory, Axios requests are defined. This separation allows for a clear distinction between UI components and the logic responsible for fetching data. It enhances modularity and maintainability by encapsulating data fetching within dedicated service files.
+In the **services** directory, Axios requests are defined. This separation allows for a clear distinction between UI components and the logic responsible for fetching data. It enhances modularity and maintainability by encapsulating data fetching within dedicated service files.
 
 ### styles: 
 
-The styles directory contains style files for the project. It includes the styling logic, such as CSS, to maintain a consistent and visually appealing appearance throughout the application.
+The **styles** directory contains style files for the project. It includes the styling logic, such as CSS, to maintain a consistent and visually appealing appearance throughout the application.
 
 ### utils: 
 
-The utils directory is home to reusable helper functions that can be utilized across different parts of the application. These functions may include common logic, calculations, or operations that are not specific to a particular component or service.
+The **utils** directory is home to reusable helper functions that can be utilized across different parts of the application. These functions may include common logic, calculations, or operations that are not specific to a particular component or service.
 
 ### tests: 
 
@@ -122,28 +122,29 @@ This folder structure aims to provide a logical organization of code, making it 
 
 ## Dependencies
 
-- axios: HTTP client for making API requests.
-- next: Next.js framework for building React applications.
-- react: JavaScript library for building user interfaces.
-- react-dom: Entry point for DOM-specific methods in React.
+- **axios:** HTTP client for making API requests.
+- **next:** Next.js framework for building React applications.
+- **react:** JavaScript library for building user interfaces.
+- **react-dom:** Entry point for DOM-specific methods in React.
 
 
 
-## Dev Dependencies
-- @testing-library/jest-dom: Testing utilities for Jest.
-- @testing-library/react: Testing utilities for React.
-- @types/jest: TypeScript types for Jest.
-- @types/node: TypeScript types for Node.js.
-- @types/react: TypeScript types for React.
-- @types/react-dom: TypeScript types for React DOM.
-- autoprefixer: PostCSS plugin to parse CSS and add vendor prefixes.
-- eslint: JavaScript and TypeScript linter.
-- eslint-config-next: ESLint configuration for Next.js.
-- jest: JavaScript testing framework.
-- jest-environment-jsdom: Jest environment for DOM testing.
-- postcss: Tool for transforming CSS with JavaScript plugins.
-- tailwindcss: Utility-first CSS framework.
-- typescript: TypeScript language support for JavaScript.
+## Development Dependencies
+
+- **@testing-library/jest-dom:** Testing utilities for Jest.
+- **@testing-library/react:** Testing utilities for React.
+- **@types/jest:** TypeScript types for Jest.
+- **@types/node:** TypeScript types for Node.js.
+- **@types/react:** TypeScript types for React.
+- **@types/react-dom:** TypeScript types for React DOM.
+- **autoprefixer:** PostCSS plugin to parse CSS and add vendor prefixes.
+- **eslint:** JavaScript and TypeScript linter.
+- **eslint-config-next:** ESLint configuration for Next.js.
+- **jest:** JavaScript testing framework.
+- **jest-environment-jsdom:** Jest environment for DOM testing.
+- **postcss:** Tool for transforming CSS with JavaScript plugins.
+- **tailwindcss:** Utility-first CSS framework.
+- **typescript:** TypeScript language support for JavaScript.
 
 
 ## Contributing
