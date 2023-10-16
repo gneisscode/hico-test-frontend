@@ -29,13 +29,18 @@ Ensuring the reliability of the application, Jest is employed for testing. Jest 
 
 The application is deployed on Vercel, a cloud platform that automates the deployment process. With Vercel, deploying updates and scaling the application becomes a straightforward task, providing a reliable and performant hosting solution.
 
-#### Jenkins for CI/CD Pipeline Automation
+#### Jenkins on Azure for CI/CD Pipeline Automation
 
 Continuous Integration and Continuous Deployment (CI/CD) are orchestrated through Jenkins. This automation tool facilitates the building, testing, and deployment of the application. The CI/CD pipeline includes building Docker images and pushing them to a Docker registry, ensuring a streamlined and efficient release process.
 
 #### Docker for Local Server Deployment
 
 Docker is integrated into the CI/CD pipeline, allowing the application to run on a local server. Docker containers provide consistency across different environments, making it easy for developers to replicate the production environment on their local machines for testing and debugging.
+
+#### Azure for Hosting Jenkins
+
+Jenkins is hosted on an Ubuntu Virtual Machine (VM) on Microsoft Azure. Leveraging Azure's infrastructure, Jenkins ensures a reliable and scalable environment for the automation of CI/CD processes. This includes building, testing, and deploying the application seamlessly.
+
 
 
 ## Table of Contents
