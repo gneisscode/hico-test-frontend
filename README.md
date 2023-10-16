@@ -84,7 +84,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 - build: Build the Next.js application for production.
 - start: Start the Next.js production server.
 - lint: Run linting using ESLint.
-- test: Run tests using Jest with 
+- test: Run tests using Jest.
 
 
 ## Folder Structure
