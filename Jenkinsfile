@@ -17,6 +17,7 @@ pipeline {
 
      stage('Client Tests') {
             steps {
+              //install dependencies and run tests
                 sh 'npm install'
                 sh 'npm test'
             }
@@ -25,6 +26,7 @@ pipeline {
     stage('Build Images') {
       steps {
         script {
+          //build docker image
           sh 'docker build -t hico-frontend-image:latest -f Dockerfile.client .'
         }
 

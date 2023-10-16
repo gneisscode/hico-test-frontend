@@ -45,6 +45,8 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
     { id: "unspecified", label: "Unspecified" },
   ];
 
+  //mapping salutations to specific genders for autopopulate functionality
+
   const salutationToGenderMap = {
     "Mr.": "male",
     "Ms.": "female",
@@ -83,10 +85,15 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
     setFormData({ ...formData, [name]: newValue });
   };
 
+  //function to remove all changes and reset form to initial state as at when component mounted
+
   const resetform = () => {
     setFormData(initialFormState);
     setSelectedCheckbox(selectedEmployee.profileColour || "Default");
   };
+
+
+  //autofill specific fields based on selected employee data
 
   useEffect(() => {
     if (selectedEmployee) {
@@ -103,14 +110,28 @@ const Info = ({ selectedEmployee, isNewEmployee, getEmployees }: any) => {
     }
   }, [selectedEmployee]);
 
+
+
+  //autopopulate gender based on selected salutation 
+
   useEffect(() => {
     //@ts-ignore
     setSelectedGender(salutationToGenderMap[formData.salutation] || selectedEmployee.gender);
   }, [formData.salutation]);
 
+
+
+  //autofill full name field when user types inside first name or last name field
+
   useEffect(() => {
     setFullName(formData.firstName + " " + formData.lastName);
   }, [formData.firstName, formData.lastName]);
+
+
+  
+
+  //request for saving form details, sends to either addEmployee or updateEmployee endpoint 
+  //depending on if isNewEmployee is true. After request is made getEmployees is called again to update table data.
 
   const UpdateEmployeeRequest = async (e: any) => {
     e.preventDefault();

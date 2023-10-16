@@ -7,6 +7,7 @@ import { EmployeeService } from "@/services";
 
 export default function Home() {
 
+
   const newEmployee: TData = {
     employeeNo: null,
     firstName: "",
@@ -45,6 +46,8 @@ export default function Home() {
          }
        };
 
+       //loads data from API when page loads
+
   useEffect(()=>{
      getEmployeesRequest()
 
@@ -58,6 +61,7 @@ export default function Home() {
         <h1 className="ml-auto self-center font-bold text-center text-2xl md:pl-24">
           Current Employees
         </h1>
+        {/* when button is clicked, it sets the selected employee variable to use the default newEmployee object*/}
         <Button
           className="ml-auto"
           onClick={() => {
@@ -72,6 +76,9 @@ export default function Home() {
       {loading ? (
         <p>Please wait a moment. Loading employee data...</p>
       ) : (
+        //employee data fetched from the backend API is passed as a prop to the table component, 
+        //the handleclick function is also passed to allow each row load its individual data, 
+        //selectedEmployee state  is passed as a prop and can be set in the table component with handleClick
         <Table
           data={employeeData}
           handleClick={handleClick}
@@ -80,6 +87,10 @@ export default function Home() {
       )}
 
       {showEmployeeInfo && (
+
+        //when a row is clicked in the table or "add new employee" button is clicked,
+        // Selected employee data is passed to and rendered in the info component
+
         <Info
           selectedEmployee={selectedEmployee}
           isNewEmployee={isNewEmployee}

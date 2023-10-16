@@ -64,6 +64,9 @@ const Table = ({ data, handleClick, selectedEmployee }: any) => {
           </tbody>
         </table>
       ) : (
+
+        //view if there are no employees to be displayed 
+        
         <div className="flex justify-center items-center w-[100%] ">
           <p>No employee found, add new employee</p>
         </div>
