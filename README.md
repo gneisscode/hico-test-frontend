@@ -6,6 +6,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 This is a Next.js application for creating and storing employee data. 
 
+The live version of this application is hosted on Vercel. You can access it [here](https://hico-test-frontend.vercel.app).
+
 
 ### Key Technologies Used
 
